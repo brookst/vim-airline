@@ -157,7 +157,6 @@ function! AirlineUpdateHighlight()
   endif
 
   if s:lastmode != l:mode
-    echom "Mode: " . l:mode
     call <sid>highlight(l:mode)
     let s:lastmode = l:mode
   endif
