@@ -18,6 +18,7 @@ call s:check_defined('g:airline_readonly_symbol', exists('g:airline_powerline_fo
 call s:check_defined('g:airline_linecolumn_prefix', exists('g:airline_powerline_fonts')?' ':':')
 call s:check_defined('g:airline_theme', 'dark')
 call s:check_defined('g:airline_modified_detection', 1)
+call s:check_defined('g:airline_paste_detection', 1)
 call s:check_defined('g:airline_exclude_filenames', ['DebuggerWatch','DebuggerStack','DebuggerStatus'])
 call s:check_defined('g:airline_exclude_filetypes', ['qf','netrw','diff','undotree','gundo','nerdtree','tagbar'])
 
@@ -27,7 +28,9 @@ let s:load_the_theme = g:airline#themes#{g:airline_theme}#normal
 call s:check_defined('g:airline_mode_map', {
       \ 'n'  : 'NORMAL',
       \ 'i'  : 'INSERT',
+      \ 'ip'  : 'INSERT-PASTE',
       \ 'R'  : 'RPLACE',
+      \ 'Rp'  : 'RPLACE-PASTE',
       \ 'v'  : 'VISUAL',
       \ 'V'  : 'V-LINE',
       \ 'c'  : 'CMD   ',
@@ -137,9 +140,16 @@ function! AirlineUpdateHighlight()
   let l:m = mode()
   let l:mode = 'normal'
   if l:m ==# "i" || l:m ==# "R"
+    if g:airline_paste_detection && &paste
+      let l:m .= 'p'
+    endif
     let l:mode = 'insert'
   elseif l:m ==? "v" || l:m ==# ""
     let l:mode = 'visual'
+  endif
+
+  if g:airline_paste_detection && l:mode ==# 'insert' && &paste
+    let l:mode .= '_paste'
   endif
 
   if g:airline_modified_detection && &modified
@@ -147,6 +157,7 @@ function! AirlineUpdateHighlight()
   endif
 
   if s:lastmode != l:mode
+    echom "Mode: " . l:mode
     call <sid>highlight(l:mode)
     let s:lastmode = l:mode
   endif

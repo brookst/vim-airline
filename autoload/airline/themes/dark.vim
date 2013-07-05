@@ -28,6 +28,14 @@ let g:airline#themes#dark#insert_modified = copy(g:airline#themes#dark#insert)
 let g:airline#themes#dark#insert_modified.info_separator = [ '#005fff' , '#5f005f' , 27  , 53 , '' ]
 let g:airline#themes#dark#insert_modified.statusline     = [ '#ffffff' , '#5f005f' , 255 , 53 , '' ]
 
+let g:airline#themes#dark#insert_paste_modified = copy(g:airline#themes#dark#insert_modified)
+let g:airline#themes#dark#insert_paste_modified.mode = [ '#00005f' , '#d78700' , 17  , 172 , '' ]
+let g:airline#themes#dark#insert_paste_modified.mode_separator = [ '#d78700' , '#5f005f' , 172  , 27 , '' ]
+
+let g:airline#themes#dark#insert_paste = copy(g:airline#themes#dark#insert)
+let g:airline#themes#dark#insert_paste.mode = [ '#00005f' , '#d78700' , 17  , 172 , '' ]
+let g:airline#themes#dark#insert_paste.mode_separator = [ '#d78700' , '#5f005f' , 172  , 27 , '' ]
+
 let s:V1 = [ '#000000' , '#ffaf00' , 232 , 214 ]
 let s:V2 = [ '#000000' , '#ff5f00' , 232 , 202 ]
 let s:V3 = [ '#ffffff' , '#5f0000' , 15  , 52  ]
